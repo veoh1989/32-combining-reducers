@@ -1,4 +1,4 @@
-![cf](http://i.imgur.com/7v5ASc8.png) 32: Budget Tracker
+![cf](http://i.imgur.com/7v5ASc8.png) 32: Budget Tracker Continued
 ===
 
 ## Submission Instructions
