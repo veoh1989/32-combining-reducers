@@ -2,18 +2,22 @@
 ===
 
 ## Submission Instructions
-  * continue working from lab-31
-  * make a **new branch** and create a **new pull request** and submit a link on canvas
+* Work in a fork of this repository
+* Work in a branch on your fork
+* Write all of your code in a directory named `lab-` + `<your name>` **e.g.** `lab-duncan`
+* Submit a pull request to this repository
+* Submit a link to your pull request on canvas
+* Submit a question, observation, and how long you spent on canvas
 
-## Requirements  
-#### Feature Tasks 
+## Requirements
+#### Feature Tasks
 ##### expense
 * in this app an expense should contain at least the following properties
   * `id` a uuid
   * `categoryID` an id that corresponds to an existing category
   * `timestamp` a date from when the category was created
   * `name` a string that is the name of the category
-  * `price` a number that is the total amount of $ in the category 
+  * `price` a number that is the total amount of $ in the category
   * feel free to add more to your expense
 
 ##### redux
@@ -21,10 +25,9 @@
 * export a reducer that holds the entire app state from `reducer/index.js`
 * create a reducer that will combine your categories reducer and expenses reducer
 
-
 ###### expenses reducer
 * create a category reducer in your your reducer directory
-* this reducer should support the following interactions 
+* this reducer should support the following interactions
   * `EXPENSE_CREATE` -- store an expense
   * `EXPENSE_UPDATE` -- update an existing expense
   * `EXPENSE_DELETE` -- delete an existing expense
@@ -37,10 +40,10 @@
 * in `lib/store.js` exports a function that will return a redux store from your app reducer
 
 ##### Components
-Create the following components and structure them according to the following diagram.  
-``` 
+Create the following components and structure them according to the following diagram.
+```
 App
-  Provider 
+  Provider
     BrowserRouter
       Route / Dashboard
         CategoryForm -- for creating categories
@@ -57,12 +60,12 @@ App
 * display a list of all the ExpenseItems belonging to the category
 
 
-##### ExpenseForm Component 
+##### ExpenseForm Component
 * should have an `onComplete` prop that will be invoked with the form state onSubmit
 * should support an `expense` prop that will both set the initial form state, and update the state in the hook on `componentWillReceiveProps()`
 * should have a `buttonText` prop that will configure the submit buttons text
 
-##### ExpenseItem Component 
+##### ExpenseItem Component
 * should have a button that will delete the expense from the Apps `onClick`
 * should display the `name` and `price` of the component
 * should display an ExpenseForm that will enable the user to update the expense in the app state
@@ -72,5 +75,5 @@ App
 * Test all of your action creators
 * Test each reducer used in your combineReducers
 
-####  Documentation  
+####  Documentation
 Write a description of the project in your README.md
