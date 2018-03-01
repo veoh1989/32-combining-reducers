@@ -15,8 +15,8 @@ class Dashboard extends React.Component {
           onComplete={this.props.dashboardCategoryCreate}/>
 
         {this.props.categories ?
-          this.props.categories.map(cat =>
-            <CategoryItem category={cat} />)
+          this.props.categories.map((cat, index) =>
+            <CategoryItem category={cat} key={index}/>)
           :
           undefined
         }
