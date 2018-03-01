@@ -47,9 +47,7 @@ class ExpenseItem extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  categories: state,
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = (dispatch, getState) => ({
   itemExpenseUpdate: expense => dispatch(expenseUpdate(expense)),
