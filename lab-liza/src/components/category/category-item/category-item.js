@@ -12,25 +12,24 @@ class CategoryItem extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      category: this.props.category ? this.props.category : undefined,
       updating: false,
     };
-    this.handleDoubleClick = this.handleDoubleClick.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
-  handleDoubleClick () {
+  handleUpdate () {
     this.setState({updating: !this.state.updating});
   }
 
   handleOnClick () {
-    this.props.itemCategoryDelete(this.state);
+    this.props.itemCategoryDelete(this.props.category);
   }
   render(){
     return(
       <section >
-        <h4 onDoubleClick={this.handleDoubleClick}>Category: {this.props.category.title}</h4>
-        <div onDoubleClick={this.handleDoubleClick}>Budget: ${this.props.category.budget}</div>
+        <h4 onDoubleClick={this.handleUpdate}>Category: {this.props.category.title}</h4>
+        <div onDoubleClick={this.handleUpdate}>Budget: ${this.props.category.budget}</div>
         <button onClick={this.handleOnClick}>delete</button>
         <ExpenseForm
           catId={this.props.category._id}
