@@ -13,7 +13,7 @@ export default (state=initialState, action) => {
   case 'EXPENSE_CREATE': return {...state, [payload.catId]: [...state[payload.catId], payload]};
   case 'EXPENSE_UPDATE': {
     let changedState = {...state};
-    let changedExpense = state[payload.catId].map(expense => expense._id === payload._id ? payload : expense); 
+    let changedExpense = state[payload.catId].map(expense => expense._id === payload._id ? payload : expense);
     changedState[payload.catId] = changedExpense;
     return changedState;
   }

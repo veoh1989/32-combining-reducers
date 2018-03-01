@@ -6,6 +6,7 @@ import ExpenseItem from '../expense-item/expense-item';
 
 class ExpenseList extends React.Component {
   render () {
+    console.log('whatever kyle', this.props.expenses);
     return (
       <section>
         <ExpenseForm
