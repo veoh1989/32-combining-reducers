@@ -1,48 +1,44 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {renderIf} from '../../../lib/utils';
-import ExpenseForm from '../expense-form/expense-form';
-import ExpenseItem from '../expense-item/expense-item';
 import CategoryForm from '../category-form/category-form';
 import {categoryUpdate} from '../../../actions/category-actions';
 import {categoryDelete} from '../../../actions/category-actions';
+import ExpenseList from '../../expense/expense-list/expense-list';
 
 
 class CategoryItem extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      category: this.props.category ? this.props.category : undefined,
       updating: false,
     };
-    this.handleDoubleClick = this.handleDoubleClick.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
-  handleDoubleClick () {
+  handleUpdate () {
     this.setState({updating: !this.state.updating});
   }
 
   handleOnClick () {
-    this.props.itemCategoryDelete(this.state);
+    this.props.itemCategoryDelete(this.props.category);
   }
   render(){
     return(
       <section >
-        <h4 onDoubleClick={this.handleDoubleClick}>Category: {this.props.category.title}</h4>
-        <div onDoubleClick={this.handleDoubleClick}>Budget: ${this.props.category.budget}</div>
+        <h4 onDoubleClick={this.handleUpdate}>Category: {this.props.category.title}</h4>
+        <div onDoubleClick={this.handleUpdate}>Budget: ${this.props.category.budget}</div>
         <button onClick={this.handleOnClick}>delete</button>
-        <ExpenseForm
-          catId={this.props.category._id}
-          buttonText='update'
-          onComplete={this.props.itemExpenseUpdate}
-        />
-        {renderIf(this.state.updating,
-          <CategoryForm
-            category={this.props.category}
-            buttonText='update'
-            onComplete={this.props.itemCategoryUpdate}/>
-        )}
+        <div className='expense-list'>
+          {renderIf(this.state.updating,
+            <CategoryForm
+              category={this.props.category}
+              buttonText='update'
+              onComplete={this.props.itemCategoryUpdate}
+            />)}
+          <ExpenseList catId={this.props.category._id}/>
+        </div>
       </section>
     );
   }

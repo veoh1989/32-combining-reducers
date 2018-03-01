@@ -1,4 +1,5 @@
 import React from 'react';
+import {renderIf} from '../../../lib/utils';
 
 class ExpenseForm extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class ExpenseForm extends React.Component {
       ? this.props.expense
       : {
         name: '',
-        price: '',
+        price: 0,
         catId: this.props.catId,
       };
 
@@ -32,13 +33,15 @@ class ExpenseForm extends React.Component {
           type="text"
           name="name"
           value={this.state.name}
-          onChange={this.handleChange}/>
+          onChange={this.handleChange}
+          placeholder="expense name"/>
 
         <input
           type="number"
           name="price"
           value={this.state.price}
-          onChange={this.handleChange}/>
+          onChange={this.handleChange}
+          placeholder="expense price"/>
 
         <button type="submit">{this.props.buttonText}</button>
       </form>
@@ -46,4 +49,4 @@ class ExpenseForm extends React.Component {
   }
 }
 
-//export default ExpenseForm;
+export default ExpenseForm;

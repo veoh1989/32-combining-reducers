@@ -2,43 +2,51 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {renderIf} from '../../../lib/utils.js';
 import ExpenseForm from '../expense-form/expense-form';
-import {expenseUpdate} from '../../../actions/expense-actions';
-import {expenseDelete} from '../../../actions/expense-actions';
+import {expenseUpdate, expenseDelete} from '../../../actions/expense-actions';
 
-class expenseItem extends React.Component {
+class ExpenseItem extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      expense: this.props.expense ? this.props.expense : undefined,
       updating: false,
     };
-    this.handleDoubleClick = this.handleDoubleClick.bind(this);
-    this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleEditUpdate = this.handleEditUpdate.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
-  handleDoubleClick () {
-    this.setState({updating: !this.state.updating});
+  handleEditUpdate (state) {
+    this.props.itemExpenseUpdate(state);
+    this.setState({editing: false});
   }
 
-  handleOnClick () {
-    this.props.itemExpenseDelete(this.state);
+  handleEdit () {
+    this.setState({editing: !this.state.editing});
   }
-  render(){
-    return(
-      <section >
-        <h4 onDoubleClick={this.handleDoubleClick}>expense: {this.props.expense.title}</h4>
-        <div onDoubleClick={this.handleDoubleClick}>Budget: ${this.props.expense.budget}</div>
-        <button onClick={this.handleOnClick}>delete</button>
-        {renderIf(this.state.updating,
-          <expenseForm
+
+  handleDelete() {
+    this.props.itemExpenseDelete(this.props.expense);
+  }
+
+  render() {
+    return (
+      <li className='expense-list-item'>
+        <section onDoubleClick={this.handleEdit}>
+          <h4>{this.props.expense.name}</h4>
+          <p>{this.props.expense.cost}</p>
+          <button onClick={this.handleDelete}>Delete</button>
+        </section>
+        {renderIf(this.state.editing,
+          <ExpenseForm
+            buttonText='Update'
             expense={this.props.expense}
-            buttonText='update'
-            onComplete={this.props.itemExpenseUpdate}/>
-        )}
-      </section>
+            onComplete={this.handleEditUpdate}
+            onCancel={this.handleEdit}/>)}
+      </li>
     );
   }
 }
+
 const mapStateToProps = state => ({
   categories: state,
 });
@@ -48,4 +56,4 @@ const mapDispatchToProps = (dispatch, getState) => ({
   itemExpenseDelete: expense => dispatch(expenseDelete(expense)),
 });
 
-//export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseItem);
