@@ -1,11 +1,5 @@
-let initialState = {
-  // 'uncategorized': [] // maybe we want to force any cards to this key when we delete a category?
-};
+let initialState = {};
 
-// {
-//   'id1234': [],
-//   'id456': [],
-// }
 
 export default (state=initialState, action) => {
   let {type, payload} = action;
@@ -16,9 +10,19 @@ export default (state=initialState, action) => {
     let changedState = {...state};
     delete changedState[payload._id];
     return changedState;
-  case 'EXPENSE_CREATE': return; // you do the thing
-  case 'EXPENSE_UPDATE': return; // you do the thing
-  case 'EXPENSE_DELETE': return; // you do the thing
+  case 'EXPENSE_CREATE': return {...state, [payload.catId]: [...state[payload.catId], payload]};
+  case 'EXPENSE_UPDATE': {
+    let changedState = {...state};
+    let changedExpense = state[payload.catId].map(expense => expense._id === payload._id ? payload : expense); 
+    changedState[payload.catId] = changedExpense;
+    return changedState;
+  }
+  case 'EXPENSE_DELETE': {
+    let changedState = { ...state };
+    let changedExpense = state[payload.catId].filter(expense => expense._id !== payload._id);
+    changedState[payload.catId] = changedExpense;
+    return changedState;
+  }
   case 'EXPENSE_RESET': return initialState;
   default: return state;
   }

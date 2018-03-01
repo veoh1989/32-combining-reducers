@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {renderIf} from '../../../lib/utils';
-import ExpenseList from '../expense-list/expense-list';
 import CategoryForm from '../category-form/category-form';
 import {categoryUpdate} from '../../../actions/category-actions';
 import {categoryDelete} from '../../../actions/category-actions';
+import ExpenseList from '../../expense/expense-list/expense-list';
 
 
 class CategoryItem extends React.Component {
@@ -36,7 +36,7 @@ class CategoryItem extends React.Component {
               category={this.props.category}
               buttonText='update'
               onComplete={this.props.itemCategoryUpdate}
-              onCancel={this.handleUpdate}/>)}
+            />)}
           <ExpenseList catId={this.props.category._id}/>
         </div>
       </section>

@@ -11,21 +11,21 @@ class ExpenseItem extends React.Component {
       updating: false,
     };
     this.handleEdit = this.handleEdit.bind(this);
-    this.handleEditComplete = this.handleEditComplete.bind(this);
+    this.handleEditUpdate = this.handleEditUpdate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleEditUpdate (state) {
+    this.props.itemExpenseUpdate(state);
+    this.setState({editing: false});
   }
 
   handleEdit () {
     this.setState({editing: !this.state.editing});
   }
 
-  handleEditComplete (state) {
-    this.props.expenseUpdateExpense(state);
-    this.setState({editing: false});
-  }
-
   handleDelete() {
-    this.props.expenseDeleteExpense(this.props.expense);
+    this.props.itemExpenseDelete(this.props.expense);
   }
 
   render() {
@@ -40,7 +40,7 @@ class ExpenseItem extends React.Component {
           <ExpenseForm
             buttonText='Update'
             expense={this.props.expense}
-            onComplete={this.handleEditComplete}
+            onComplete={this.handleEditUpdate}
             onCancel={this.handleEdit}/>)}
       </li>
     );
